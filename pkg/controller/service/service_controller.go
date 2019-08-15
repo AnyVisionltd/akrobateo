@@ -205,20 +205,6 @@ func newDaemonSetForService(svc *corev1.Service) *appsv1.DaemonSet {
 					},
 				},
 				Spec: corev1.PodSpec{
-					InitContainers: []corev1.Container{
-						corev1.Container{
-							Name:  "sysctl",
-							Image: getLbImage(),
-							Command: []string{
-								"sh",
-								"-c",
-								"sysctl -w net.ipv4.ip_forward=1",
-							},
-							SecurityContext: &corev1.SecurityContext{
-								Privileged: &trueVal,
-							},
-						},
-					},
 				},
 			},
 			UpdateStrategy: appsv1.DaemonSetUpdateStrategy{
